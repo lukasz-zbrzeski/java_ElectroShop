@@ -1,0 +1,81 @@
+<div th:fragment="navbar">
+  <nav class="navbar navbar-light bg-light shadow-sm">
+    <div class="container-fluid">
+      <!-- Logo -->
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/images/logo1.png" alt="Logo" style="height: 40px;" class="me-2">
+        <span>ElectroShop</span>
+      </a>
+
+      <!-- Hamburger button -->
+      <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+              aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Zamknij"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column gap-2">
+
+          <!-- Koszyk -->
+          <a class="btn btn-outline-secondary" href="/cart" th:text="#{button.cart}"></a>
+
+          <!-- Panel administratora -->
+          <a class="btn btn-outline-primary" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" href="/admin-panel" th:text="#{button.admin_panel}"></a>
+
+          <!-- Mój profil -->
+          <a class="btn btn-outline-primary" th:if="${#authorization.expression('hasRole(''USER'')')}" href="/profile" th:text="#{button.profile}"></a>
+
+          <!-- Wylogowanie -->
+          <form th:if="${#authorization.expression('isAuthenticated()')}" th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-outline-danger w-100" th:text="#{button.logout}"></button>
+          </form>
+
+          <!-- Logowanie -->
+          <a th:unless="${#authorization.expression('isAuthenticated()')}" class="btn btn-outline-primary" href="/auth/login" th:text="#{button.login}"></a>
+
+          <!-- Języki -->
+          <form method="get" action="">
+            <input type="hidden" name="lang" value="pl">
+            <button type="submit" class="btn btn-link p-0 border-0"><img src="/images/poland.png" alt="PL" style="height: 20px;"></button>
+          </form>
+          <form method="get" action="">
+            <input type="hidden" name="lang" value="en">
+            <button type="submit" class="btn btn-link p-0 border-0"><img src="/images/united-kingdom.png" alt="EN" style="height: 20px;"></button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Menu dla dużych ekranów -->
+      <div class="d-none d-lg-flex align-items-center gap-2">
+        <a class="btn btn-outline-secondary" href="/cart" th:text="#{button.cart}"></a>
+        <a class="btn btn-outline-primary" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" href="/admin-panel" th:text="#{button.admin_panel}"></a>
+        <a class="btn btn-outline-primary" th:if="${#authorization.expression('hasRole(''USER'')')}" href="/profile" th:text="#{button.profile}"></a>
+        <form th:if="${#authorization.expression('isAuthenticated()')}" th:action="@{/logout}" method="post">
+          <button type="submit" class="btn btn-outline-danger" th:text="#{button.logout}"></button>
+        </form>
+        <a th:unless="${#authorization.expression('isAuthenticated()')}" class="btn btn-outline-primary" href="/auth/login" th:text="#{button.login}"></a>
+        <form method="get" action="">
+          <input type="hidden" name="lang" value="pl">
+          <button type="submit" class="btn btn-link p-0 border-0"><img src="/images/poland.png" alt="PL" style="height: 20px;"></button>
+        </form>
+        <form method="get" action="">
+          <input type="hidden" name="lang" value="en">
+          <button type="submit" class="btn btn-link p-0 border-0"><img src="/images/united-kingdom.png" alt="EN" style="height: 20px;"></button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <style>
+    @media (max-width: 991.98px) {
+      .offcanvas-end {
+        width: 50% !important;
+        max-width: 50vw !important;
+      }
+    }
+  </style>
+</div>
