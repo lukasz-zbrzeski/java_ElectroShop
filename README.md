@@ -39,7 +39,7 @@ Upewnij się, że baza `shop-app` istnieje.
 ### 3. Uruchom aplikację
 
 #### Z IDE (np. IntelliJ)
-Uruchom klasę `ElectroShopApplication`
+Uruchom klasę `ShopAppApplication`
 
 #### Lub przez terminal
 
