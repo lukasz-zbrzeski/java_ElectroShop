@@ -28,7 +28,7 @@ cd java_ElectroShop
 W pliku `src/main/resources/application.properties`:
 
 ```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/shop-app
+spring.datasource.url=jdbc:postgresql://localhost:8080/shop-app
 spring.datasource.username=postgres
 spring.datasource.password=your_password
 spring.jpa.hibernate.ddl-auto=update
